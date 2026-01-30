@@ -1,56 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ecom Shopping</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ecom-Shop</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <!-- Header -->
   <header>
-    <h1>My Ecom Shop</h1>
+    <div class="logo">Ecom-Shop</div>
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Search products..." />
+      <button onclick="searchProducts()">Search</button>
+    </div>
     <nav>
-      <ul>
-        <li><a href="#food">Food</a></li>
-        <li><a href="#clothing">Clothing</a></li>
-        <li><a href="#cart">Cart 🛒</a></li>
-      </ul>
+      <a href="#food">Food</a>
+      <a href="#clothing">Clothing</a>
+      <a href="#cart">Cart 🛒</a>
     </nav>
   </header>
 
-  <!-- Food Category -->
-  <section id="food">
-    <h2>Food Products</h2>
-    <div class="product-grid">
-      <div class="product-card">
-        <h3>Fresh Apple</h3>
-        <p>₹50 / kg</p>
-        <button onclick="addToCart('Fresh Apple', 50)">Add to Cart</button>
-      </div>
-      <div class="product-card">
-        <h3>Whole Wheat Bread</h3>
-        <p>₹40</p>
-        <button onclick="addToCart('Whole Wheat Bread', 40)">Add to Cart</button>
-      </div>
-    </div>
-  </section>
+  <!-- Main Layout -->
+  <div class="main-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <h3>Categories</h3>
+      <ul>
+        <li><a href="#food">Food</a></li>
+        <li><a href="#clothing">Clothing</a></li>
+      </ul>
+    </aside>
 
-  <!-- Clothing Category -->
-  <section id="clothing">
-    <h2>Clothing Products</h2>
-    <div class="product-grid">
-      <div class="product-card">
-        <h3>Casual T-Shirt</h3>
-        <p>₹299</p>
-        <button onclick="addToCart('Casual T-Shirt', 299)">Add to Cart</button>
-      </div>
-      <div class="product-card">
-        <h3>Denim Jeans</h3>
-        <p>₹999</p>
-        <button onclick="addToCart('Denim Jeans', 999)">Add to Cart</button>
-      </div>
-    </div>
-  </section>
+    <!-- Product Section -->
+    <main class="products">
+      <section id="food">
+        <h2>Food Products</h2>
+        <div class="product-grid">
+          <div class="product-card" data-name="Fresh Apple">
+            <h3>Fresh Apple</h3>
+            <p>₹50 / kg</p>
+            <button onclick="addToCart('Fresh Apple', 50)">Add to Cart</button>
+          </div>
+          <div class="product-card" data-name="Whole Wheat Bread">
+            <h3>Whole Wheat Bread</h3>
+            <p>₹40</p>
+            <button onclick="addToCart('Whole Wheat Bread', 40)">Add to Cart</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="clothing">
+        <h2>Clothing Products</h2>
+        <div class="product-grid">
+          <div class="product-card" data-name="Casual T-Shirt">
+            <h3>Casual T-Shirt</h3>
+            <p>₹299</p>
+            <button onclick="addToCart('Casual T-Shirt', 299)">Add to Cart</button>
+          </div>
+          <div class="product-card" data-name="Denim Jeans">
+            <h3>Denim Jeans</h3>
+            <p>₹999</p>
+            <button onclick="addToCart('Denim Jeans', 999)">Add to Cart</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
 
   <!-- Cart Section -->
   <section id="cart">
@@ -58,6 +74,16 @@
     <ul id="cart-items"></ul>
     <p id="total">Total: ₹0</p>
   </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 Ecom-Shop | All rights reserved</p>
+    <p>
+      <a href="#">About Us</a> | 
+      <a href="#">Contact</a> | 
+      <a href="#">Privacy Policy</a>
+    </p>
+  </footer>
 
   <script src="script.js"></script>
 </body>
