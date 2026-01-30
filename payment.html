@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Payment - Ecom-Shop</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .payment-container { max-width:700px; margin:40px auto; background:#fff; padding:20px; border-radius:8px; }
+    .summary-list { list-style:none; padding:0; }
+    .summary-list li { padding:8px 0; border-bottom:1px solid #eee; }
+    .finish-btn { background:#28a745; color:#fff; border:none; padding:10px 16px; border-radius:6px; cursor:pointer; }
+    .back-link { margin-left:12px; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">Ecom-Shop</div>
+  </header>
+
+  <div class="payment-container">
+    <h2>Payment</h2>
+    <p>Available Points: <strong id="points-available">0</strong></p>
+    <h3>Order Summary</h3>
+    <ul id="summary" class="summary-list"></ul>
+    <p id="pay-total">Total: ₹0</p>
+    <div>
+      <button id="finish" class="finish-btn">Finish Buy</button>
+      <a href="index.html" class="back-link">Back to shop</a>
+    </div>
+    <p id="message"></p>
+  </div>
+
+  <script>
+    const summaryEl = document.getElementById('summary');
+    const totalEl = document.getElementById('pay-total');
+    const pointsEl = document.getElementById('points-available');
+    const messageEl = document.getElementById('message');
+
+    let checkoutCart = JSON.parse(localStorage.getItem('checkout_cart') || '[]');
+    let checkoutTotal = Number(localStorage.getItem('checkout_total') || '0');
+    let points = Number(localStorage.getItem('points') || '1000');
+
+    function renderSummary() {
+      summaryEl.innerHTML = '';
+      if (!checkoutCart || checkoutCart.length === 0) {
+        summaryEl.innerHTML = '<li>Your cart is empty.</li>';
+      } else {
+        checkoutCart.forEach(item => {
+          const li = document.createElement('li');
+          li.textContent = `${item.product} - ₹${item.price}`;
+          summaryEl.appendChild(li);
+        });
+      }
+      totalEl.textContent = `Total: ₹${checkoutTotal}`;
+      pointsEl.textContent = points;
+    }
+
+    document.getElementById('finish').addEventListener('click', () => {
+      if (!checkoutCart || checkoutCart.length === 0) {
+        messageEl.textContent = 'No items to purchase.';
+        return;
+      }
+      // Deduct points by rounded total (assumption: 1 point = ₹1)
+      const deduction = Math.round(checkoutTotal);
+      points = Number(points) - deduction;
+      localStorage.setItem('points', String(points));
+
+      // Clear cart data
+      localStorage.removeItem('checkout_cart');
+      localStorage.removeItem('checkout_total');
+      localStorage.setItem('cart', JSON.stringify([]));
+      localStorage.setItem('total', '0');
+
+      messageEl.textContent = `Purchase complete. Points deducted: ${deduction}. Remaining points: ${points}.`;
+      // Short delay then return to shop
+      setTimeout(() => {
+        window.location.href = 'index.html';
+      }, 1600);
+    });
+
+    renderSummary();
+  </script>
+</body>
+</html>

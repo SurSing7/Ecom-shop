@@ -9,6 +9,7 @@
 <body>
   <header>
     <div class="logo">Ecom-Shop</div>
+    <div class="points-display">Points: <span id="points">0</span></div>
     <div class="search-bar">
       <input type="text" id="searchInput" placeholder="Search products..."/>
       <button onclick="searchProducts()">Search</button>
@@ -16,8 +17,7 @@
     <nav>
       <a href="#food">Food</a>
       <a href="#clothing">Clothing</a>
-      <a href="#cart">Cart 🛒</a>
-      <a href="#checkout">Checkout</a>
+      <a href="#cart" id="cart-link">Cart 🛒 <span id="cart-count" class="cart-badge">0</span></a>
       <a href="orders.html">Your Orders</a>
     </nav>
   </header>
@@ -26,19 +26,21 @@
     <section id="food">
       <h2>Food Products</h2>
       <div class="product-grid">
-        <div class="product-card">
+        <div class="product-card" data-name="Fresh Apple">
           <a href="product.html?name=Fresh%20Apple&price=50&img=https://via.placeholder.com/200x150?text=Apple">
             <img src="https://via.placeholder.com/200x150?text=Apple" alt="Apple"/>
             <h3>Fresh Apple</h3>
             <p>₹50 / kg</p>
           </a>
+          <button onclick="addToCart('Fresh Apple', 50)">Add to Cart</button>
         </div>
-        <div class="product-card">
+        <div class="product-card" data-name="Whole Wheat Bread">
           <a href="product.html?name=Whole%20Wheat%20Bread&price=40&img=https://via.placeholder.com/200x150?text=Bread">
             <img src="https://via.placeholder.com/200x150?text=Bread" alt="Bread"/>
             <h3>Whole Wheat Bread</h3>
             <p>₹40</p>
           </a>
+          <button onclick="addToCart('Whole Wheat Bread', 40)">Add to Cart</button>
         </div>
       </div>
     </section>
@@ -46,19 +48,21 @@
     <section id="clothing">
       <h2>Clothing Products</h2>
       <div class="product-grid">
-        <div class="product-card">
+        <div class="product-card" data-name="Casual T-Shirt">
           <a href="product.html?name=Casual%20T-Shirt&price=299&img=https://via.placeholder.com/200x150?text=T-Shirt">
             <img src="https://via.placeholder.com/200x150?text=T-Shirt" alt="T-Shirt"/>
             <h3>Casual T-Shirt</h3>
             <p>₹299</p>
           </a>
+          <button onclick="addToCart('Casual T-Shirt', 299)">Add to Cart</button>
         </div>
-        <div class="product-card">
+        <div class="product-card" data-name="Denim Jeans">
           <a href="product.html?name=Denim%20Jeans&price=999&img=https://via.placeholder.com/200x150?text=Jeans">
             <img src="https://via.placeholder.com/200x150?text=Jeans" alt="Jeans"/>
             <h3>Denim Jeans</h3>
             <p>₹999</p>
           </a>
+          <button onclick="addToCart('Denim Jeans', 999)">Add to Cart</button>
         </div>
       </div>
     </section>
@@ -68,14 +72,9 @@
     <h2>Your Cart</h2>
     <ul id="cart-items"></ul>
     <p id="total">Total: ₹0</p>
-  </section>
-
-  <section id="checkout">
-    <h2>Checkout</h2>
-    <p id="points">Available Points: 9000000</p>
-    <p id="checkout-total">Cart Total: ₹0</p>
-    <button onclick="checkout()">Confirm Purchase</button>
-    <p id="checkout-message"></p>
+    <div class="cart-actions">
+      <button id="checkoutButton" onclick="goToPayment()">Checkout</button>
+    </div>
   </section>
 
   <footer>
