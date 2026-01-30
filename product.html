@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Product Detail</title>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <header>
+    <div class="logo"><a href="index.html" style="color:white;text-decoration:none;">Ecom-Shop</a></div>
+  </header>
+
+  <main class="product-detail">
+    <img id="product-img" src="" alt="Product"/>
+    <h2 id="product-name"></h2>
+    <p id="product-price"></p>
+    <button id="addBtn">Add to Cart</button>
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const name = params.get("name");
+    const price = parseInt(params.get("price"));
+    const img = params.get("img");
+
+    document.getElementById("product-name").textContent = name;
+    document.getElementById("product-price").textContent = "₹" + price;
+    document.getElementById("product-img").src = img;
+
+    document.getElementById("addBtn").onclick = () => addToCart(name, price);
+  </script>
+</body>
+</html>
