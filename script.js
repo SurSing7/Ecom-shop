@@ -17,3 +17,12 @@ function renderCart() {
   });
   document.getElementById("total").textContent = `Total: ₹${total}`;
 }
+
+function searchProducts() {
+  const query = document.getElementById("searchInput").value.toLowerCase();
+  const products = document.querySelectorAll(".product-card");
+  products.forEach(card => {
+    const name = card.getAttribute("data-name").toLowerCase();
+    card.style.display = name.includes(query) ? "block" : "none";
+  });
+}
